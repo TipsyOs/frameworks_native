@@ -48,6 +48,7 @@ LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES -DEGL_EGLEXT_PROTOTYPES
 ifeq ($(TARGET_BOARD_PLATFORM),omap4)
     LOCAL_CFLAGS += -DHAS_CONTEXT_PRIORITY
 endif
+
 ifeq ($(TARGET_BOARD_PLATFORM),s5pc110)
     LOCAL_CFLAGS += -DHAS_CONTEXT_PRIORITY
 endif
@@ -133,6 +134,7 @@ ifeq ($(TARGET_USES_QCOM_BSP), true)
     ifeq ($(call is-board-platform-in-list,msm8996),true)
         LOCAL_CFLAGS += -DSDM_TARGET
     endif
+endif
 
 ifeq ($(BOARD_USES_SAMSUNG_HDMI),true)
         LOCAL_CFLAGS += -DSAMSUNG_HDMI_SUPPORT
