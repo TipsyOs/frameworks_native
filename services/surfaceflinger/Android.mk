@@ -48,8 +48,13 @@ LOCAL_CFLAGS += -DGL_GLEXT_PROTOTYPES -DEGL_EGLEXT_PROTOTYPES
 ifeq ($(TARGET_BOARD_PLATFORM),omap4)
     LOCAL_CFLAGS += -DHAS_CONTEXT_PRIORITY
 endif
+
 ifeq ($(TARGET_BOARD_PLATFORM),s5pc110)
     LOCAL_CFLAGS += -DHAS_CONTEXT_PRIORITY
+endif
+
+ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
+	LOCAL_CFLAGS += -DSWAP_BUFFERS_WORKAROUND -DEXYNOS4_HWC_1_1
 endif
 
 ifeq ($(TARGET_DISABLE_TRIPLE_BUFFERING),true)
@@ -129,6 +134,13 @@ ifeq ($(TARGET_USES_QCOM_BSP), true)
     ifeq ($(call is-board-platform-in-list,msm8996),true)
         LOCAL_CFLAGS += -DSDM_TARGET
     endif
+endif
+
+ifeq ($(BOARD_USES_SAMSUNG_HDMI),true)
+        LOCAL_CFLAGS += -DSAMSUNG_HDMI_SUPPORT
+        LOCAL_SHARED_LIBRARIES += libTVOut libhdmiclient
+        LOCAL_C_INCLUDES += hardware/samsung/$(TARGET_BOARD_PLATFORM)/hal/libhdmi/libhdmiservice
+        LOCAL_C_INCLUDES += hardware/samsung/$(TARGET_BOARD_PLATFORM)/hal/include
 endif
 
 LOCAL_MODULE := libsurfaceflinger
